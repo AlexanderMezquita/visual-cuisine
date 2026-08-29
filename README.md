@@ -102,7 +102,13 @@ Being built in small, independently reviewable phases:
 - [x] **Phase 1 — Project scaffolding**: Next.js 16 (TS, Tailwind v4, App
       Router, ESLint flat config), Prettier with Tailwind class sorting, base
       metadata, this README.
-- [ ] Phase 2 — Design tokens & global shell (header/nav, footer, layout)
+- [x] **Phase 2 — Design tokens & global shell**: warm neutral color palette
+      (light/dark) as CSS theme tokens, Fraunces display font, header with
+      centered wordmark/nav and an active-link underline, a mobile menu with
+      an animated open/close transition, a manual light/dark theme toggle
+      (`useSyncExternalStore`, persisted, no flash on load), and placeholder
+      `/photo`, `/about`, `/contact` routes.
+- [ ] Phase 3 — Home landing section (hero)
 - [ ] Phase 3 — Home landing section (hero)
 - [ ] Phase 4 — Sanity CMS setup (schema, Studio, seed content)
 - [ ] Phase 5 — Gallery page (masonry grid)
