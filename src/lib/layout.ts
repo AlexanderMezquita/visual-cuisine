@@ -10,7 +10,8 @@ export const CONTAINER_WIDTH_CLASS = "mx-auto w-full max-w-6xl px-6";
 // gallery) that should read bigger than the header/footer's text column.
 export const WIDE_CONTAINER_CLASS = "mx-auto w-full max-w-[88rem] px-3 sm:px-6";
 
-// Shared underline-link treatment (hero CTA, About CTA, ...). Callers add
-// their own placement/sizing classes (margin, text size, tracking) on top.
+// Shared underline-link treatment (About CTA, contact form submit, ...).
+// Callers add their own placement/sizing classes (margin, text size,
+// tracking) on top.
 export const UNDERLINE_LINK_CLASS =
   "border-foreground/40 hover:border-foreground border-b transition-colors";

@@ -5,11 +5,13 @@
   --foreground: #1a1714;
   --muted: #7a736c;
   --border: #e7e2da;
+  --error: #b3261e;
 
   --dark-background: #14120f;
   --dark-foreground: #f2ede6;
   --dark-muted: #9c948a;
   --dark-border: #2a2620;
+  --dark-error: #ff8a75;
 }
 
 @theme inline {
@@ -17,6 +19,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-error: var(--error);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-fraunces);
@@ -29,6 +32,7 @@
   --foreground: var(--dark-foreground);
   --muted: var(--dark-muted);
   --border: var(--dark-border);
+  --error: var(--dark-error);
 }
 
 /* The brand mark is black line art with a transparent background, so it

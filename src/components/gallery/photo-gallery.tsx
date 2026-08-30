@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { placeholderPhotos } from "@/lib/placeholder-photos";
+import type { GalleryPhoto } from "@/lib/placeholder-photos";
 import { RevealOnScroll } from "@/components/gallery/reveal-on-scroll";
 
-export function PhotoGallery() {
+export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
   return (
     <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 md:gap-8">
-      {placeholderPhotos.map((photo) => (
+      {photos.map((photo) => (
         <RevealOnScroll key={photo.src}>
           <div className="relative aspect-[2/3] overflow-hidden">
             <Image
