@@ -37,3 +37,15 @@
   --muted: var(--dark-muted);
   --border: var(--dark-border);
 }
+
+/* The brand mark is black line art with a transparent background, so it
+   needs to flip to white in dark mode or it disappears against the page. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand-mark {
+    filter: invert(1);
+  }
+}
+
+:root[data-theme="dark"] .brand-mark {
+  filter: invert(1);
+}

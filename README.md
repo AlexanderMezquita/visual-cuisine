@@ -108,8 +108,16 @@ Being built in small, independently reviewable phases:
       an animated open/close transition, a manual light/dark theme toggle
       (`useSyncExternalStore`, persisted, no flash on load), and placeholder
       `/photo`, `/about`, `/contact` routes.
-- [ ] Phase 3 — Home landing section (hero)
-- [ ] Phase 3 — Home landing section (hero)
+- [x] **Phase 3 — Home landing section**: hero on `/` with brand name,
+      tagline, and a "View the Work" CTA into `/photo` (a placeholder gradient
+      backdrop was tried and removed — swapped for a real photo once the CMS
+      lands). Integrated the real Visual Cuisine logo: the white background
+      was removed from the source artwork (true alpha transparency, not just
+      a visual crop), the icon mark now sits in the header next to the
+      wordmark and tagline (inverted to white via CSS in dark mode, since
+      it's black line art), and it's the site's favicon/apple-icon (with its
+      own opaque rounded-white backing, since a transparent favicon disappears
+      against dark browser chrome).
 - [ ] Phase 4 — Sanity CMS setup (schema, Studio, seed content)
 - [ ] Phase 5 — Gallery page (masonry grid)
 - [ ] Phase 6 — Lightbox interaction

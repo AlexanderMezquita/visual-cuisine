@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { navLinks } from "@/lib/nav-links";
 import { CONTAINER_WIDTH_CLASS } from "@/lib/layout";
@@ -10,11 +11,24 @@ export function Header() {
       <div
         className={`${CONTAINER_WIDTH_CLASS} flex flex-col items-center gap-3 py-6`}
       >
-        <Link href="/" className="font-display text-lg tracking-wide">
-          Visual Cuisine
+        <Link href="/" className="flex flex-col items-center gap-1">
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={72}
+            height={72}
+            priority
+            className="brand-mark h-18 w-18"
+          />
+          <span className="font-display text-lg tracking-wide uppercase">
+            Visual Cuisine
+          </span>
+          <span className="text-muted text-[10px] tracking-[0.2em] uppercase">
+            Food &amp; Beverage Photography
+          </span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden gap-8 md:flex">
+        <nav aria-label="Primary" className="hidden gap-8 md:mt-4 md:flex">
           {navLinks.map((link) => (
             <NavLink
               key={link.href}
