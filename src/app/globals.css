@@ -22,15 +22,8 @@
   --font-display: var(--font-fraunces);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --background: var(--dark-background);
-    --foreground: var(--dark-foreground);
-    --muted: var(--dark-muted);
-    --border: var(--dark-border);
-  }
-}
-
+/* Light is the default regardless of OS preference — dark only applies once
+   the user explicitly picks it via the theme toggle. */
 :root[data-theme="dark"] {
   --background: var(--dark-background);
   --foreground: var(--dark-foreground);
@@ -40,12 +33,6 @@
 
 /* The brand mark is black line art with a transparent background, so it
    needs to flip to white in dark mode or it disappears against the page. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .brand-mark {
-    filter: invert(1);
-  }
-}
-
 :root[data-theme="dark"] .brand-mark {
   filter: invert(1);
 }

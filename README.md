@@ -138,7 +138,29 @@ Being built in small, independently reviewable phases:
       exported by the installed React 19.2.8 yet despite the framework's own
       docs describing it as available).
 - [ ] Phase 6 — Lightbox interaction
-- [ ] Phase 7 — About section/page
+- [x] **Phase 7 — About section**: a compact, centered section on `/about`
+      (portrait + a short first-person bio ending in a "Get in touch" link to
+      `/contact`), modeled after the structure of a reference photographer's
+      about page — not a big hero, just image + text vertically centered
+      between the header and footer. Placeholder bio copy and portrait until
+      the real ones are ready. Found the same "flex-item wrapper around a
+      grid of `fill` images doesn't reliably stretch" bug a third time, so
+      fixed it at the source this time: `CONTAINER_WIDTH_CLASS` now includes
+      `w-full` itself, instead of remembering to add it per page. On mobile,
+      the bio text now precedes the portrait in both DOM order and CSS
+      `order` (not just visually — an initial version reordered visually
+      only, which would have mismatched screen-reader reading order at
+      exactly the breakpoint it targeted); desktop reorders visually via
+      `md:order-*` instead. The portrait also reuses the shared
+      `placeholderPhotos` data instead of a hardcoded path, has `priority`
+      as the page's likely LCP element, and its CTA shares a
+      `UNDERLINE_LINK_CLASS` constant with the home hero instead of
+      duplicating the class string.
+- [x] **Theme default**: the site now always defaults to light regardless of
+      OS `prefers-color-scheme` — dark only applies once a visitor explicitly
+      picks it via the toggle. Removed the media-query-based auto-dark CSS
+      and the toggle's `matchMedia` fallback so the visual default and the
+      toggle's own logic can't disagree.
 - [ ] Phase 8 — Contact page (form + email delivery)
 - [ ] Phase 9 — SEO & performance polish
 - [ ] Phase 10 — Deployment finalization

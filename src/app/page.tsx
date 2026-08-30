@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UNDERLINE_LINK_CLASS } from "@/lib/layout";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
       </h1>
       <Link
         href="/photo"
-        className="border-foreground/40 hover:border-foreground mt-8 border-b pb-1 text-sm tracking-wide uppercase transition-colors"
+        className={`${UNDERLINE_LINK_CLASS} mt-8 pb-1 text-sm tracking-wide uppercase`}
       >
         View the Work
       </Link>

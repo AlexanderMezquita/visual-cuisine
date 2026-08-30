@@ -9,15 +9,11 @@ export const THEME_STORAGE_KEY = "theme";
 
 const THEME_EVENT = "visual-cuisine:theme-change";
 
-const darkMediaQuery =
-  typeof window !== "undefined"
-    ? window.matchMedia("(prefers-color-scheme: dark)")
-    : null;
-
+// Light is the default regardless of OS preference (see globals.css) —
+// dark only applies once the user explicitly picks it here.
 function getSnapshot(): Theme {
   const stored = localStorage.getItem(THEME_STORAGE_KEY);
-  if (stored === "light" || stored === "dark") return stored;
-  return darkMediaQuery?.matches ? "dark" : "light";
+  return stored === "dark" ? "dark" : "light";
 }
 
 // The server can't read localStorage, so this must return a fixed value.
@@ -31,11 +27,9 @@ function getServerSnapshot(): Theme {
 function subscribe(callback: () => void) {
   window.addEventListener(THEME_EVENT, callback);
   window.addEventListener("storage", callback);
-  darkMediaQuery?.addEventListener("change", callback);
   return () => {
     window.removeEventListener(THEME_EVENT, callback);
     window.removeEventListener("storage", callback);
-    darkMediaQuery?.removeEventListener("change", callback);
   };
 }
 
