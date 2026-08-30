@@ -49,3 +49,29 @@
 :root[data-theme="dark"] .brand-mark {
   filter: invert(1);
 }
+
+/* Remounting the page content (via a key change on navigation) restarts
+   this animation, giving route changes a simple fade transition without a
+   router/animation library. Opacity-only, deliberately: animating transform
+   here would leave a permanent non-none `transform` on this wrapper once the
+   animation ends (fill-mode `both`), which (a) creates a new containing
+   block for any `position: fixed` descendant — breaking a future lightbox
+   overlay — and (b) counts as a layout shift for CLS on every navigation. */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-transition {
+  animation: page-fade-in 0.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}

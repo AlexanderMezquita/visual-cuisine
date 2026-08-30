@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { PlaceholderPage } from "@/components/placeholder-page";
+import { WIDE_CONTAINER_CLASS } from "@/lib/layout";
+import { PhotoGallery } from "@/components/gallery/photo-gallery";
 
 export const metadata: Metadata = {
   title: "Photo",
 };
 
 export default function PhotoPage() {
-  return <PlaceholderPage title="Photo" message="Gallery coming soon." />;
+  return (
+    <div className={`${WIDE_CONTAINER_CLASS} py-10`}>
+      <h1 className="sr-only">Photo</h1>
+      <PhotoGallery />
+    </div>
+  );
 }

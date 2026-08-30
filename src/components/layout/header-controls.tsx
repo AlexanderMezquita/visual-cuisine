@@ -30,11 +30,15 @@ export function HeaderControls() {
         </div>
       </div>
 
+      {/* z-50: this is the only stacking-order dependency in the app right
+          now (nothing else sets a z-index), so it just needs to beat page
+          content's default auto stacking. Revisit if a future overlay
+          (e.g. the Phase 6 lightbox) introduces its own z-index scale. */}
       <nav
         aria-label="Mobile"
         aria-hidden={!open}
         inert={!open}
-        className={`bg-background border-border absolute inset-x-0 top-full overflow-hidden border-b transition-[max-height,opacity] duration-300 ease-in-out md:hidden ${
+        className={`bg-background border-border absolute inset-x-0 top-full z-50 overflow-hidden border-b transition-[max-height,opacity] duration-300 ease-in-out md:hidden ${
           open ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         }`}
       >

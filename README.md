@@ -21,20 +21,20 @@ something that is:
 
 ## Tech Stack & Rationale
 
-| Layer | Choice | Why |
-|---|---|---|
-| Framework | [Next.js 16](https://nextjs.org) (App Router, TypeScript, strict mode) | Server Components by default keep client JS near-zero for a mostly-static site; built-in image optimization; file-based Metadata API for SEO; on-demand ISR lets CMS edits go live without a full redeploy |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first, tiny production CSS footprint, fast iteration on a visual-first design |
-| CMS | [Sanity](https://www.sanity.io) *(added in the CMS phase)* | Best-in-class image pipeline (CDN, format negotiation, hotspot/crop, blur placeholders), generous free tier, structured schema instead of a folder of files, an editable Studio so the photographer can manage content without touching code |
-| CMS integration | `next-sanity` + GROQ *(added in the CMS phase)* | Official client, typed, designed for the App Router |
-| Images | Sanity CDN URLs → `next/image` *(added in the gallery phase)* | Automatic AVIF/WebP negotiation, responsive `sizes`, blur-up placeholders, lazy loading below the fold |
-| Gallery layout | `react-photo-album` *(added in the gallery phase)* | Purpose-built masonry/justified gallery layouts, responsive, minimal JS |
-| Lightbox | `yet-another-react-lightbox` *(added in the lightbox phase)* | Small, accessible (keyboard nav, focus trap), integrates directly with react-photo-album |
-| Fonts | `next/font` (self-hosted) | Zero layout shift, no external font requests |
-| Contact form | React Hook Form + Zod → Next.js Route Handler → Resend *(added in the contact phase)* | Full control over UX and validation, no third-party form-widget branding |
-| Deployment | [Vercel](https://vercel.com) | First-class Next.js support, edge image optimization, preview URLs per PR, simple webhook-driven ISR revalidation from Sanity |
-| Testing | Vitest + Testing Library *(added alongside the contact form)* | Covers the gallery component and the form logic — most of the site is static markup, so the test surface is intentionally small |
-| Tooling | ESLint (flat config) + Prettier (with `prettier-plugin-tailwindcss`), TypeScript strict mode | Standard hygiene, consistent formatting including automatic Tailwind class sorting |
+| Layer           | Choice                                                                                       | Why                                                                                                                                                                                                                                          |
+| --------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework       | [Next.js 16](https://nextjs.org) (App Router, TypeScript, strict mode)                       | Server Components by default keep client JS near-zero for a mostly-static site; built-in image optimization; file-based Metadata API for SEO; on-demand ISR lets CMS edits go live without a full redeploy                                   |
+| Styling         | [Tailwind CSS v4](https://tailwindcss.com)                                                   | Utility-first, tiny production CSS footprint, fast iteration on a visual-first design                                                                                                                                                        |
+| CMS             | [Sanity](https://www.sanity.io) _(added in the CMS phase)_                                   | Best-in-class image pipeline (CDN, format negotiation, hotspot/crop, blur placeholders), generous free tier, structured schema instead of a folder of files, an editable Studio so the photographer can manage content without touching code |
+| CMS integration | `next-sanity` + GROQ _(added in the CMS phase)_                                              | Official client, typed, designed for the App Router                                                                                                                                                                                          |
+| Images          | Sanity CDN URLs → `next/image` _(added in the gallery phase)_                                | Automatic AVIF/WebP negotiation, responsive `sizes`, blur-up placeholders, lazy loading below the fold                                                                                                                                       |
+| Gallery layout  | Plain CSS grid (Tailwind), fixed 3/2/1 columns                                               | Tried `react-photo-album`'s masonry mode first, but a uniform, evenly-spaced grid read cleaner for this brief and didn't need an extra dependency to get there                                                                               |
+| Lightbox        | `yet-another-react-lightbox` _(added in the lightbox phase)_                                 | Small, accessible (keyboard nav, focus trap)                                                                                                                                                                                                 |
+| Fonts           | `next/font` (self-hosted)                                                                    | Zero layout shift, no external font requests                                                                                                                                                                                                 |
+| Contact form    | React Hook Form + Zod → Next.js Route Handler → Resend _(added in the contact phase)_        | Full control over UX and validation, no third-party form-widget branding                                                                                                                                                                     |
+| Deployment      | [Vercel](https://vercel.com)                                                                 | First-class Next.js support, edge image optimization, preview URLs per PR, simple webhook-driven ISR revalidation from Sanity                                                                                                                |
+| Testing         | Vitest + Testing Library _(added alongside the contact form)_                                | Covers the gallery component and the form logic — most of the site is static markup, so the test surface is intentionally small                                                                                                              |
+| Tooling         | ESLint (flat config) + Prettier (with `prettier-plugin-tailwindcss`), TypeScript strict mode | Standard hygiene, consistent formatting including automatic Tailwind class sorting                                                                                                                                                           |
 
 ### Performance approach
 
@@ -118,8 +118,25 @@ Being built in small, independently reviewable phases:
       it's black line art), and it's the site's favicon/apple-icon (with its
       own opaque rounded-white backing, since a transparent favicon disappears
       against dark browser chrome).
-- [ ] Phase 4 — Sanity CMS setup (schema, Studio, seed content)
-- [ ] Phase 5 — Gallery page (masonry grid)
+- [ ] Phase 4 — Sanity CMS setup (schema, Studio, seed content). Attempted
+      and rolled back once already — packages installed, schema/client
+      scaffolded, then fully reverted (uninstalled, files removed) to revisit
+      with a clearer plan before creating a real Sanity project.
+- [x] **Phase 5 — Gallery page**: `/photo` renders a fixed grid (2 columns
+      mobile, 3 desktop) of local placeholder images, wider than the
+      header/footer content column for visual impact — swapped for real
+      photography via Sanity once Phase 4 lands. Deliberately _not_ a masonry
+      layout: tried `react-photo-album`'s masonry mode first, but a strict,
+      evenly-spaced grid (uniform `aspect-[2/3]` portrait tiles, generous
+      gaps) read
+      cleaner, so the dependency was removed in favor of a plain CSS grid.
+      Each tile fades/slides in via `IntersectionObserver` as it scrolls into
+      view rather than all being visible on load.
+- [x] **Page transitions**: route changes fade the page content in via a
+      `key={pathname}`-remount + CSS animation (no router/animation library —
+      React's newer `<ViewTransition>` was considered, but isn't actually
+      exported by the installed React 19.2.8 yet despite the framework's own
+      docs describing it as available).
 - [ ] Phase 6 — Lightbox interaction
 - [ ] Phase 7 — About section/page
 - [ ] Phase 8 — Contact page (form + email delivery)
