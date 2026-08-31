@@ -33,7 +33,7 @@ export function RevealOnScroll({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out motion-reduce:!translate-y-0 motion-reduce:!opacity-100 ${visible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} ${className ?? ""}`}
+      className={`transition-all duration-1000 ease-out motion-reduce:!translate-y-0 ${visible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} ${className ?? ""}`}
     >
       {children}
     </div>

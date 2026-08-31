@@ -4,7 +4,7 @@ import Script from "next/script";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/layout/page-transition";
-import { THEME_STORAGE_KEY } from "@/components/theme-toggle";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 import "./globals.css";
 
 // Revalidates the whole site daily so build-time values (e.g. the footer's

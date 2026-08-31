@@ -35,6 +35,17 @@
   --error: var(--dark-error);
 }
 
+/* Fades the page surface between light/dark instead of an instant snap when
+   the theme toggle changes the CSS variables above. Deliberately not gated
+   behind prefers-reduced-motion: it's a color crossfade with no movement, so
+   it doesn't trigger the vestibular issues that preference exists to avoid
+   (unlike the gallery's translate-based reveal below, which does respect it). */
+body {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
 /* The brand mark is black line art with a transparent background, so it
    needs to flip to white in dark mode or it disappears against the page. */
 :root[data-theme="dark"] .brand-mark {
@@ -47,7 +58,9 @@
    here would leave a permanent non-none `transform` on this wrapper once the
    animation ends (fill-mode `both`), which (a) creates a new containing
    block for any `position: fixed` descendant — breaking a future lightbox
-   overlay — and (b) counts as a layout shift for CLS on every navigation. */
+   overlay — and (b) counts as a layout shift for CLS on every navigation.
+   Also deliberately not gated behind prefers-reduced-motion, same reasoning
+   as the theme crossfade above: no movement, just opacity. */
 @keyframes page-fade-in {
   from {
     opacity: 0;
@@ -59,10 +72,4 @@
 
 .page-transition {
   animation: page-fade-in 0.4s ease-out both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .page-transition {
-    animation: none;
-  }
 }

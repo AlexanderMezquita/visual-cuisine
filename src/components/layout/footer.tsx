@@ -1,4 +1,5 @@
 import { InstagramIcon, PinterestIcon } from "@/components/icons";
+import { RevealOnScroll } from "@/components/reveal-on-scroll";
 
 const socialLinks = [
   { href: "#", label: "Instagram", Icon: InstagramIcon },
@@ -8,7 +9,7 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="border-border border-t">
-      <div className="mx-auto flex max-w-6xl flex-col-reverse items-center gap-4 px-6 py-8 text-sm sm:flex-row sm:justify-between">
+      <RevealOnScroll className="mx-auto flex max-w-6xl flex-col-reverse items-center gap-4 px-6 py-8 text-sm sm:flex-row sm:justify-between">
         <p className="text-muted">
           © {new Date().getFullYear()} Visual Cuisine
         </p>
@@ -24,7 +25,7 @@ export function Footer() {
             </a>
           ))}
         </nav>
-      </div>
+      </RevealOnScroll>
     </footer>
   );
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { GalleryPhoto } from "@/lib/placeholder-photos";
-import { RevealOnScroll } from "@/components/gallery/reveal-on-scroll";
+import { RevealOnScroll } from "@/components/reveal-on-scroll";
 
 export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
   return (

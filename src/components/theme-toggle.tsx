@@ -2,10 +2,9 @@
 
 import { useSyncExternalStore } from "react";
 import { MoonIcon, SunIcon } from "@/components/icons";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 
 type Theme = "light" | "dark";
-
-export const THEME_STORAGE_KEY = "theme";
 
 const THEME_EVENT = "visual-cuisine:theme-change";
 
